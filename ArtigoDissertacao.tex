@@ -1,19 +1,13 @@
 \documentclass[conference,compsoc]{IEEEtran}
 
-
-
 % *** CITATION PACKAGES ***
 %
 \ifCLASSOPTIONcompsoc
-  % IEEE Computer Society needs nocompress option
-  % requires cite.sty v4.0 or later (November 2003)
   \usepackage[nocompress]{cite}
 \else
   % normal IEEE
   \usepackage{cite}
 \fi
-% cite.sty was written by Donald Arseneau
-% V1.6 and later of IEEEtran pre-defines the format of the cite.sty package
 
 %######### citações modelo abnt 2 ############
 \usepackage[num]{abntex2cite}
@@ -42,6 +36,7 @@
 
 \usepackage{graphics, graphicx}
 \usepackage{subfig}
+%\usepackage{subfigure}
 
 % correct bad hyphenation here
 \hyphenation{op-tical net-works semi-conduc-tor}
@@ -114,7 +109,7 @@ ampliando o espaço temporal de escolha para determinadas rotas.
 
 \vspace{0.1cm}
 
-noindent\textbf{Palavras-chave: Modelo de predição, Mineração de dados, Tráfego em rodovias, Árvores de decisão, CRISP-DM.}
+\textbf{Palavras-chave: Modelo de predição, Mineração de dados, Tráfego em rodovias, Árvores de decisão, CRISP-DM.}
 
 
 \vspace{0.1cm}
@@ -412,16 +407,17 @@ cada nó é um teste no valor do atributo como:
 
 \begin{figure}[ht] \unitlength= 1mm \thicklines
  \centering{
-    \begin{picture}(100,6)%115
-      \put(0,0){\framebox(98,6)} \put(3,2){$age(X,``youth")$ AND $income(X,``high")  \to classe (X,``A")$}
-      \put(0,-7){\framebox(98,6)} \put(3,-5){$age(X,``youth")$ AND $income(X,``low") \to classe (X,``B")$}
-      \put(0,-14){\framebox(73,6)} \put(3,-12){$age(X,``middle-aged")$  $\to classe (X,``B")$}
-      \put(0,-21){\framebox(62,6)} \put(3,-19){$age(X,``senior")$  $ \to classe (X,``B")$}
+    \begin{picture}(90,6)%115
+      \put(0,0){\framebox(86,6)} \put(3,2){\small $age(X,youth)$ AND $income(X,``high'')  \to classe (X,``A'')$}
+      \put(0,-7){\framebox(85,6)} \put(3,-5){\small $age(X,youth)$ AND $income(X,``low'') \to classe (X,``B'')$}
+      \put(0,-14){\framebox(71,6)} \put(3,-12){\small $age(X,``middle-aged'')$  $\to classe (X,``B'')$}
+      \put(0,-21){\framebox(55,6)} \put(3,-19){\small $age(X,``senior'')$  $ \to classe (X,``B'')$}
       \end{picture}
    }
 \end{figure}
 
-\vspace{20mm}
+
+\vspace{5mm}
   
 A seguir, a árvore de decisão que explicita se um cliente, de acordo com sua idade terá determinada classe:
 \begin{figure}[!ht]
@@ -431,7 +427,6 @@ A seguir, a árvore de decisão que explicita se um cliente, de acordo com sua i
 \tiny Fonte: Han, J. and Kamber, M. 
 \end{figure}  
 
-\pagebreak
 
 A figura a seguir representa uma rede neural com as mesmas características da árvore de decisão anterior:
 \begin{figure}[!ht]
@@ -476,78 +471,154 @@ Essa qualidade é utilizada para interpretar os resultados.
 
 \section{Desenho metodológico proposto}
 
-TARGET DATA: INFORMAÇÕES PROVENIENTES DA BASE DE DADOS DA PRF DE 2007 A 2015,UMA DE ACIDENTES E OUTRA DE INTERDIÇÕES. DOS DADOS TRAZIDOS PELA PFR, UTILIZAMOS NO ESTUDO
-COMO VARIÁVEIS DE ENTRADA: NÚMERO DA RODOVIA (BR), KM EM QUE SE DEU A OCORRÊNCIA, TIPO DE VEÍCULO ENVOLVIDO NA OCORRÊNCIA, TIPO DE ACIDENTE (I.E., COLISÃO - LATERAL
-FRONTAL, TRASEIRA - ATROPELAMENTO COM OU SEM MORTE - PESSOAS OU ANIMAIS - VISIBILIDADE, DENTRE OUTROS),HORÁRIO E DATA DA OCORRÊNCIA, ENTRE A SEREM APRESENTADAS MAIS ADIANTE.
-PREPROCESSAMENTO: ALÉM DESSAS VARIÁVEIS, NA FASE DE PREPROCESSAMENTO FORAM DESCONSIDERADOS ALGUNS ATRIBUTOS POR CONTEREM INCONSISTÊNCIAS E MISSING DATA, TAIS COMO, LATITUDE E LONGITUDE.
-CABE DESTACAR QUE A BASE, COMO UM TODO, APRESENTAVA INCONSISTÊNCIA, UMA VEZ QUE, POR EXEMPLO, UM MESMO ACIDENTE, QUANDO ENVOLVIA DOIS OU MAIS VEÍCULOS,
-ERA LANÇADO NA BASE DUAS OU MAIS VEZES, EM FUNÇÃO DA QUANTIDADE DE VEÍCULOS ENVOLVIDOS.ELIMINAÇÃO DE VARIÁVEIS EM DUPLICIDADE, I.E., FOI RETIRADO DA BASE
-O ATRIBUTO `` MÊS'' E O `` ANO'' POR ESTAREM CONTEMPLADOS NO ATRIBUTO `` DATA''.
-TRANSFORMATION: FORAM CRIADAS AS VARIÁVEIS: `` TIPO DE PARALISAÇÃO'', CONTEMPLANDO - ACIDENTE SEM MORTOS E COM NO MÁXIMO DOIS VEÍCULOS ENVOLVIDOS.
-``DIA DA SEMANA'' (SUNDAY, MONDAY... SATURDAY). AJUSTE DE HORA (I.E., 17:58H, 17:59H, 18H, 18:01H, 18:02, ARREDONDADA PARA 18H), AJUSTE DE KM (SEGUINDO A MESMA LÓGICA
-DO AJUSTE DE HORA, I.E. KM 199,9; 200,6, FORAM ARREDONDADOS PARA KM 200). 
-DATA MINING: O ALGORITMO ESCOLHIDO PARA O ESTUDO FOI ÁRVORE DE DECISÃO, QUE POSSIBILITA UMA INTERPRETAÇÃO IMEDIATA E DE FÁCIL COMPREENSÃO. COMO FERRAMENTAS FORAM 
-ESCOLHIDAS KNIME E WECA, COM O OBJETIVO DE ESTABELECER UMA COMPARAÇÃO ENTRE OS RESULTADOS EM AMBAS AS FERRAMENTAS, COM A INTENÇÃO DE PRODUZIR UM CLASSIFICADOR
-MAIS PRECISO. A TÉCNICA ENSAMBLE AFIRMA QUE O PRODUTO DE UM OU MAIS CLASSIFICADORES IGUAIS OU MAIS DE UM CLASSIFICADOR AUMENTA A PRECISÃO.
-TANTO NA FERRAMENTA KNIME QUANTO WECA, A ÁRVORE DE DECISÃO É CHAMADA J48, UMA VEZ QUE SE TRATA DE UMA IMPLEMENTAÇÃO EM JAVA DO ALGORITMO 45.
-FOI CALCULADA A CORRELAÇÃO LINEAR ENTRE AS VARIÁVEIS, A FIM DE DETERMINAR O GRAU DE QUALIDADE A ELAS RELACIONADO. POR EXEMPLO, FOI IDENTIFICADA UMA ALTA 
-CORRELAÇÃO ENTRE AS VARIÁVEIS TIPO DE ACIDENTE E TRAÇADO DA VIA.
+O desenho metodológico proposto para o estudo contemplou as fases do KKD, conforme descrito a seguir.
 
-INTERPRETATION/EVALUATION: PRODUÇÃO DE ÁRVORES DE DECISÃO A PARTIR DO ESTABELECIMENTO DE DIFERENTES NÓS-RAIZES, DEFINIDOS EM VIRTUDE DA CORRELAÇÃO
-LINEAR ENCONTRADA.
+\textbf{Target Data}: Nessa etapa foram coletadas as informações provenientes da base de dados da Polícia Rodoviária Federal (PRF) de 2007 a 2015, 
+uma vez que nosso interesse era o de analisar os últimos dez anos. No entanto, como a base de dados só dispunha de informações a partir 
+de 2007, foram considerados os nove anos disponíveis. A PRF dispunha de duas bases de dados distintas: a primeira contendo relatório de 
+``acidentes'' e a outra, interdições. A partir dos dados capturados na base da PRF, utilizamos como variáveis de entrada: 
+(1) nomenclatura da rodovia (i.e. BR 101); 
+(2) quilômetro (km) em que se deu a ocorrência; 
+(3) tipo de veículo envolvido na ocorrência: carro, motocicleta, caminhão, bicicleta, etc.; 
+(4) tipo de acidente: colisão-frontal, lateral, traseira; atropelamento: com ou sem morte, envolvendo pessoas e/ou animais; 
+(5) causa do acidente: ausência ou baixa visibilidade, excesso de velocidade, buracos na via, dentre outros; 
+(6) horário e data da ocorrência; dentre outros que serão apresentados mais adiante. 
 
-
-A metodologia utilizada nessa pesquisa contemplou um plano em duas etapas. 
-A primeira etapa  completa o ciclo todo do processo CRISP-DM, onde está o modelo preditivo e a descoberta de 
-conhecimento sobre o comportamento das rodovias estudadas. O descoberta de conhecimento sobre esses comportamento nas rodovias tem 
-a ver com o “modus operandi” dos utilizadores, sobre possíveis erros de traçados e outros que possam ser identificados pelos algoritmos 
-de mineração empregados no processo.
-
-A priori foram escolhidos algoritmos com algumas características especiais, tais como; robustez, tolerância à faltas (missing data), 
-taxa de aprendizagem, e facilidade de in- terpretação dos dados processados. No quesito robustez, tolerância à faltas e taxa de 
-aprendizagem as redes neurais artificiais (RNA), com uma topologia Perceptron multica- madas com retroalimentação “backpropagation”, 
-essas redes destacam-se pela capacidade de generalização e especificidade em modelos de previsão.
-
-A extrapolação do modelo preditivo ocorre quando este se integra à uma estrutura dinâmica a serem exibidas em mapas vetoriais, dado um espaço temporal pré-determinado por um agente; o utilizador. Através de APIs os mapas vetoriais permitem a geolocalização dos pontos classificados ou os pontos onde haverá grande número de retenções, conhecido no meio da logística de cargas como gargalo. A API do Google-Maps é o “front end”, foi escolhida por permitir maior pela
-portabilidade e simplicidade para integração da estrutura dinâmica com a preditiva.
-Para a integração às redes sociais, foi escolhida a API do Twitter. Esta “interface” é simples de ser configurada e gera poucos dados; o utilizador tem que ser eficaz ao publicar suas postagem em um espaço de 140 caracteres, isso facilita a forma como os dados são extraídos pela quantidade diminuta deles, bem como a quantidade conexões à Internet, contudo está rede social tem uma crescente quantidade de postagens no formato imagens, isso dificulta a mineração em textos. A API do Twitter tem a finalidade de integrar o modelo dinâmica dos mapas vetoriais às redes sociais. Esta “interface” é responsável por fornecer “input” à terceira etapa, servindo de “busca local” das informações mais recentes das redes sociais, relativas à trechos das rodovias; os “feeds” do Twitter (ou twetts) fornecem dados que serão minerados e interpretados à posteriori.
-A figura a seguir ilustra (um overview) essa metodologia descrita graficamente.
-
-\begin{figure}[ht]
-\centering
-\caption{Etapas da modelo proposto}
-\includegraphics[width=80mm, height=45mm]{Figuras/metodologiaGeral.png}\\
-\tiny Fonte: autor
-\end{figure}
-
+\textbf{Preprocessing}: nessa fase foram tomadas as variáveis, sendo desconsiderados alguns atributos, pelo fato de conterem inconsistências e 
+missing data, como, por exemplo, informações acerca de latitude e longitude. Cabe destacar que a base, como um todo, apresentava sérias 
+inconsistências, uma vez que, por exemplo, um mesmo acidente, quando envolvia dois ou mais veículos, era lançado na base duas ou mais 
+vezes, em função da quantidade de veículos envolvidos. Foram eliminadas variáveis em duplicidade (i.e. as variáveis mês e ano, que apareciam 
+separadamente, já estavam contempladas na variável Data.).
+\textbf{Transformation}: Foram criadas as variáveis ``tipo de paralisação'', contemplando acidentes sem mortos e com, no máximo, 
+dois veículos envolvidos; ``Dias da semana'' (sunday, mondai, …., saturado); ``Ajuste de hora'' (i.e. 17h58, 17h59, 18h, 18h01, 18h02, 
+arredondadas para 18h); ``Ajuste de Km'' (seguindo a mesma lógica do ajuste de hora).
+\textbf{Data Mining}: O algoritmo escolhido para o estudo foi a árvore de decisão, que possibilita uma interpretação imediata e de fácil 
+compreensão. Como ferramentas, foram escolhidas o Knime e o Weka, com o objetivo de estabelecer uma comparação entre ambos, cuja intenção 
+era a de produzir um classificador mais preciso. Nessa direção, a técnica Ensemble afirma que o produto de um ou mais classificadores 
+iguais, ou mais de um classificador, aumenta a precisão. Tanto na ferramenta Knime quanto Weka a árvore de decisão é chamada J48, uma vez 
+que se trata de uma implementação em java do algoritmo C4.5. Foi calculada a correção entre linear entre as variáveis ``tipo de acidente'' 
+e ``traçado da via''.
+\textbf{Interpretation/Evaluation}: Produção de árvores de decisão a partir do estabelecimento de diferentes nós-raízes, definidos em 
+virtude da correlação linear encontrada.
 
 \section{Dados de encontrados antes da Mineração}
 
-%\begin{columns}
-%\begin{column}{3cm}
+%% BR 101 
 \begin{figure}[ht]
 \begin{center}
-\includegraphics[height=3.0cm]{graficos/br101_1.png}
-\caption{Graphic hour - crash(km)}
+     \includegraphics[height=4.0cm]{graficos/br101_1.png}
+     \includegraphics[height=4.0cm]{graficos/br101_2.png}
+     \includegraphics[height=4.0cm]{graficos/br101_3.png}
+     \small{\caption{Graphic: hour x crash(km)-Road:BR 101}}
+     \small{\caption{Boxplot: Período do dia}}
+     \small{\caption{Histogram: place(Km) x frequence}}
 \end{center}
 \end{figure}
-%\end{column}
 
-
-%\begin{column}{3cm}
+%% BR 104
 \begin{figure}[ht]
 \begin{center}
-\includegraphics[height=3.0cm]{graficos/br101_2.png}
-\caption{Graphic hour - crask(km)}
+     \includegraphics[height=4.0cm]{graficos/br104_1.png}
+     \includegraphics[height=4.0cm]{graficos/br104_3.png}
+	\caption{Graphic: hour x crash(km)-Road:BR 104}
+	\caption{Histogram: place(Km) x frequence}
 \end{center}
 \end{figure}
-%\end{column}
-%\end{columns}
+
+%% BR 110
+\begin{figure}[ht]
+\begin{center}
+     \includegraphics[height=4.0cm]{graficos/br110_1.png}
+     \includegraphics[height=4.0cm]{graficos/br110_3.png}
+      \caption{Graphic: hour x crash(km)-Road:BR 110}
+      \caption{Histogram: place(Km) x frequence}
+\end{center}
+\end{figure}
+
+%% BR 116
+\begin{figure}[ht]
+\begin{center}
+     \includegraphics[height=4.0cm]{graficos/br116_1.png}
+     \includegraphics[height=4.0cm]{graficos/br116_2.png}
+      \caption{Graphic: hour x crash(km)-Road:BR 116}
+      \caption{Histogram: place(Km) x frequence}
+\end{center}
+\end{figure}
+
+%% BR 232
+\begin{figure}[ht]
+\begin{center}
+     \includegraphics[height=4.0cm]{graficos/br232_1.png}
+     \includegraphics[height=4.0cm]{graficos/br232_2.png}
+      \caption{Graphic: hour x crash(km)-Road:BR 232}
+      \caption{Histogram: place(Km) x frequence}
+\end{center}
+\end{figure}
+
+%% BR 316
+\begin{figure}[ht]
+\begin{center}
+     \includegraphics[height=4.0cm]{graficos/br316_1.png}
+     \includegraphics[height=4.0cm]{graficos/br316_2.png}
+      \caption{Graphic: hour x crash(km)-Road:BR 316}
+      \caption{Histogram: place(Km) x frequence}
+\end{center}
+\end{figure}
+
+%% BR 407
+\begin{figure}[ht]
+\begin{center}
+     \includegraphics[height=4.0cm]{graficos/br407_1.png}
+     \includegraphics[height=4.0cm]{graficos/br407_2.png}
+      \caption{Graphic: hour x crash(km)-Road:BR 407}
+      \caption{Histogram: place(Km) x frequence}
+\end{center}
+\end{figure}
+
+%% BR 408
+\begin{figure}[ht]
+\begin{center}
+     \includegraphics[height=4.0cm]{graficos/br408_1.png}
+     \includegraphics[height=4.0cm]{graficos/br408_2.png}
+      \caption{Graphic: hour x crash(km)-Road:BR 408}
+      \caption{Histogram: place(Km) x frequence}
+\end{center}
+\end{figure}
+
+%% BR 423
+\begin{figure}[ht]
+\begin{center}
+     \includegraphics[height=4.0cm]{graficos/br423_1.png}
+     \includegraphics[height=4.0cm]{graficos/br423_2.png}
+     \tiny{\caption{Graphic: hour x crash(km)-Road:BR 423}}
+     \tiny{ \caption{Histogram: place(Km) x frequence}}
+\end{center}
+\end{figure}
+
+%% BR 424
+\begin{figure}[ht]
+\begin{center}
+     \includegraphics[height=4.0cm]{graficos/br424_1.png}
+     \includegraphics[height=4.0cm]{graficos/br424_2.png}
+     \small{\caption{Graphic: hour x crash(km)-Road:BR 424}}
+     \small{\caption{Histogram: place(Km) x frequence}}
+\end{center}
+\end{figure}
+
+%% BR 428
+\begin{figure}[ht]
+\begin{center}
+     \includegraphics[height=4.0cm]{graficos/br428_1.png}
+     \includegraphics[height=4.0cm]{graficos/br428_2.png}
+     \tiny { \caption{Graphic: hour x crash(km)-Road:BR 428}}
+     \tiny { \caption{Histogram: place(Km) x frequence}}
+\end{center}
+\end{figure}
 
 
 \section{Dados depois da Mineração}
 
-
+\pagebreak
 
 
 \section{Considerações finais}
@@ -605,6 +676,7 @@ The authors would like to thank...
   Acessado em: {17 abril. 2016},
   year:  {2012}
 
+  
 \bibitem{FrotaVeiculosIBGE}
   Instituto Brasileiro de Geografia e Estatística - IBGE,
   title: {Região Metropolitana do Recife no Contexto de Pernambuco no Censo 2010},
@@ -640,6 +712,52 @@ The authors would like to thank...
   month: {July}, 
   year: {2014}
 
+  
+\bibitem{Learning2007}
+  J. R. Quinlan,
+  title = {Induction of Decision Trees},
+  doi = {10.1023/A:1022643204877},
+  isbn = {0885-6125},
+  issn = {0885-6125, 1573-0565},
+  journal = {Expert Systems},
+  publisher = {Learning, Machine and Learning, Machine and Publishers},
+  pages = {81--106},
+  pmid = {17050186},
+  year = {2007}
+
+
+%[32]
+\bibitem{Learning1979}
+  J. R. Quinlan,
+  title = {Discovering rules by induction from large collections of examples},
+  journal = {Expert systems in the micro electronic age. Edinburgh University Press},
+  publisher = {In D. Michie},
+  year = {1979}
+
+  
+\bibitem{TeoriaInf}	
+  Han, J and Kamber, M,
+  title = {Data mining: concepts and techniques},
+  volume = {2nd editio},
+  year = {2006}
+
+  
+\bibitem{DataMining}
+  J. Han, and M. Kamber,
+  title = {Data Mining: Concepts and Techniques},
+  publisher = {Elsevier, San Francisco},
+  volume = {2 edition},
+  year = {2006}
+
+
+\bibitem{MachineLearning}
+  Ian H. Witten and Eibe Frank,
+  title = {Data Mining: Practical Machine Learning Tools and Techniques},
+  journal={Elsevier, San Francisco},
+  volume ={2 edition},
+  year = {2005}
+
+  
 %4
 \bibitem{DataMining2}
   J. Han, and M. Kamber,
@@ -649,7 +767,7 @@ The authors would like to thank...
   volume: {2 edition},
   year: {2006}
 
-
+  
 \bibitem{Chapman2000}
   P. Chapman, and J. Clinton, and R. Kerber, and T. Khabaza et al,
   title: {Crisp-Dm 1.0},
